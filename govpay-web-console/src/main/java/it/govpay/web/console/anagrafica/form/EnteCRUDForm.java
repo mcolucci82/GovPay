@@ -123,8 +123,8 @@ public class EnteCRUDForm extends BaseForm implements Form,Serializable{
 			this.localita.setDefaultValue(null);
 			this.cap.setDefaultValue(null);
 			this.provincia.setDefaultValue(null);
-			this.abilitaNodoPagamento.setDefaultValue(false);
-			this.abilitaNodoPagamento.setDisabled(false);
+			this.abilitaNodoPagamento.setDefaultValue(true);
+			this.abilitaNodoPagamento.setDisabled(true);
 		}
 
 		this.reset();
@@ -151,6 +151,7 @@ public class EnteCRUDForm extends BaseForm implements Form,Serializable{
 		this.identificativoUnivoco.setLabel(Utils.getInstance().getMessageFromResourceBundle("ente.identificativoUnivoco"));
 		this.identificativoUnivoco.setName("identificativoUnivoco");
 		this.identificativoUnivoco.setValue(null);
+		this.identificativoUnivoco.setRendered(false);
 
 		this.idFiscale = this.getWebGenericProjectFactory().getInputFieldFactory().createText();
 		this.idFiscale.setRequired(true);
@@ -205,7 +206,8 @@ public class EnteCRUDForm extends BaseForm implements Form,Serializable{
 		this.abilitaNodoPagamento.setRequired(false);
 		this.abilitaNodoPagamento.setLabel(Utils.getInstance().getMessageFromResourceBundle("ente.abilitaNodoPagamento"));
 		this.abilitaNodoPagamento.setName("abilitaNodoPagamento");
-		this.abilitaNodoPagamento.setValue(null);
+		this.abilitaNodoPagamento.setValue(new Boolean(true)); 
+		this.abilitaNodoPagamento.setRendered(false); 
 //		this.abilitaNodoPagamento.setFieldsToUpdate(this.getId() + "_formPnl");
 //		this.abilitaNodoPagamento.setForm(this);
 		
@@ -239,9 +241,9 @@ public class EnteCRUDForm extends BaseForm implements Form,Serializable{
 //		if(StringUtils.isEmpty(_value))
 //			return Utils.getInstance().getMessageWithParamsFromCommonsResourceBundle(CostantiForm.FIELD_NON_PUO_ESSERE_VUOTO, this.idEnteCreditore.getLabel());
 
-		String _value = this.identificativoUnivoco.getValue();
-		if(StringUtils.isEmpty(_value))
-			return Utils.getInstance().getMessageWithParamsFromCommonsResourceBundle(CostantiForm.FIELD_NON_PUO_ESSERE_VUOTO, this.identificativoUnivoco.getLabel());
+		String _value = null; // this.identificativoUnivoco.getValue();
+//		if(StringUtils.isEmpty(_value))
+//			return Utils.getInstance().getMessageWithParamsFromCommonsResourceBundle(CostantiForm.FIELD_NON_PUO_ESSERE_VUOTO, this.identificativoUnivoco.getLabel());
 
 		_value = this.idFiscale.getValue();
 		if(StringUtils.isEmpty(_value))
@@ -298,8 +300,11 @@ public class EnteCRUDForm extends BaseForm implements Form,Serializable{
 		EnteCreditoreModel enteCreditore = new EnteCreditoreModel();
 
 		enteCreditore.setDenominazione(this.denominazione.getValue());
-		enteCreditore.setIdentificativoUnivoco(this.identificativoUnivoco.getValue());
+		
 		enteCreditore.setIdFiscale(this.idFiscale.getValue());
+		
+		
+		enteCreditore.setIdentificativoUnivoco(this.idFiscale.getValue().trim());
 		enteCreditore.setIndirizzo(this.indirizzo.getValue());
 		enteCreditore.setCivico(this.civico.getValue());
 		enteCreditore.setLocalita(this.localita.getValue());

@@ -120,8 +120,12 @@ public class EnteService extends BaseService<EnteSearchForm> implements IEnteSer
 	public void store(String key, EnteBean obj,DominioEnteModel dominioEnte) throws ServiceException {
 		try{
 			log.debug("Salvataggio Ente Creditore ["+obj.getDenominazione().getValue()+"] in corso...");
-			this.anagraficaEjb.salvaEnteCreditore(key , obj.getDTO(), Utils.getLoggedUtente().getIdOperatore());
+			String idEnte = this.anagraficaEjb.salvaEnteCreditore(key , obj.getDTO(), Utils.getLoggedUtente().getIdOperatore());
 			log.debug("Salvataggio Ente Creditore ["+obj.getDenominazione().getValue()+"] completato.");
+			
+			// Assegno il nuovo id all'oggetto, necessario per il salvataggio del dominio			
+			if(key == null)
+				obj.getDTO().setIdEnteCreditore(idEnte);
 
 			if(dominioEnte != null){
 				log.debug("Salvataggio Dominio Ente Creditore ["+obj.getDenominazione().getValue()+"] in corso...");

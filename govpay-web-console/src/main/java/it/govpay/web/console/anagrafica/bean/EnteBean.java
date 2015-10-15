@@ -70,6 +70,7 @@ public class EnteBean extends BaseBean<EnteCreditoreModel, Long> implements IBea
 			this.identificativoUnivoco = this.getWebGenericProjectFactory().getOutputFieldFactory().createText();
 			this.identificativoUnivoco.setLabel(Utils.getInstance().getMessageFromResourceBundle("ente.identificativoUnivoco"));
 			this.identificativoUnivoco.setName("identificativoUnivoco");
+			this.identificativoUnivoco.setRendered(false); 
 
 			this.nodoPagamentoAbilitato = this.getWebGenericProjectFactory().getOutputFieldFactory().createText();
 			this.nodoPagamentoAbilitato.setLabel(Utils.getInstance().getMessageFromResourceBundle("ente.nodoPagamentoAbilitato"));
@@ -114,16 +115,17 @@ public class EnteBean extends BaseBean<EnteCreditoreModel, Long> implements IBea
 			this.fieldsDatiGenerali.setStyleClass("beanTable"); 
 			this.fieldsDatiGenerali.setColumnClasses("labelAllineataDx,valueAllineataSx,labelAllineataDx,valueAllineataSx");
 
-			this.fieldsDatiGenerali.addField(this.stato);
-			this.fieldsDatiGenerali.addField(this.denominazione);
-
-			this.fieldsDatiGenerali.addField(this.identificativoUnivoco);
-			this.fieldsDatiGenerali.addField(this.indirizzo);
-
 			this.fieldsDatiGenerali.addField(this.idFiscale);
-			this.fieldsDatiGenerali.addField(this.localita);
-
+			this.fieldsDatiGenerali.addField(this.stato);
+			
+			this.fieldsDatiGenerali.addField(this.denominazione);
 			this.fieldsDatiGenerali.addField(this.nodoPagamentoAbilitato);
+
+//			this.fieldsDatiGenerali.addField(this.identificativoUnivoco);
+			
+			this.fieldsDatiGenerali.addField(this.localita);
+			this.fieldsDatiGenerali.addField(this.indirizzo);
+			
 			this.fieldsDatiGenerali.addField(this.provincia);
 
 			this.listaTributi = new ArrayList<TributoBean>();

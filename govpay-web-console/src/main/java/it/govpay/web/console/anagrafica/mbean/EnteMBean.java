@@ -180,7 +180,7 @@ public class EnteMBean extends BaseListView<EnteBean, Long, EnteSearchForm,EnteC
 
 				if(oldInt!= null){
 					MessageUtils.addErrorMsg(Utils.getInstance().getMessageFromResourceBundle("ente.form.erroreValidazione") +
-							": " +Utils.getInstance().getMessageWithParamsFromResourceBundle("ente.form.enteEsistente",this.form.getIdEnteCreditore().getValue()));
+							": " +Utils.getInstance().getMessageWithParamsFromResourceBundle("ente.form.enteEsistente",this.form.getIdFiscale().getValue()));
 					return null;
 				}
 
