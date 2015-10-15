@@ -68,8 +68,15 @@ public class NotificaClient extends BasicClient{
 		} catch (Exception e) {
 			throw new GovPayException(GovPayExceptionEnum.ERRORE_INTERNO,"Impossibile serializzare il messaggio di notifica", e);
 		}
+		
+		
+//		System.out.println("CONTENUTO VERIFICA: ");
+//		System.out.println(verificaTxt);
+		
 		byte[] b = verificaTxt.getBytes();
 
+		httpConn.addRequestProperty("Content-Length", ""+b.length);
+		httpConn.addRequestProperty("Content-Type", "text/xml");
 
 		// Impostazione transfer-length
 		try {
