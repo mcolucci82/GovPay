@@ -72,7 +72,8 @@ public class Utils extends org.openspcoop2.generic_project.web.impl.jsf1.utils.U
 				List<String> identificativiEnteCreditore = new ArrayList<String>();
 				if(loggedUtente.getEnti() != null && loggedUtente.getEnti().size() > 0 ){
 					for (EnteCreditoreModel ente : loggedUtente.getEnti()) {
-						identificativiEnteCreditore.add(ente.getIdEnteCreditore());
+						if(ente != null)
+							identificativiEnteCreditore.add(ente.getIdEnteCreditore());
 					}
 				}
 				return identificativiEnteCreditore;
@@ -92,7 +93,8 @@ public class Utils extends org.openspcoop2.generic_project.web.impl.jsf1.utils.U
 				List<String> identificativiEnteCreditore = new ArrayList<String>();
 				if(loggedUtente.getEnti() != null && loggedUtente.getEnti().size() > 0 ){
 					for (EnteCreditoreModel ente : loggedUtente.getEnti()) {
-						identificativiEnteCreditore.add(ente.getIdFiscale());
+						if(ente != null)
+							identificativiEnteCreditore.add(ente.getIdFiscale());
 					}
 				}
 				return identificativiEnteCreditore;
@@ -109,7 +111,13 @@ public class Utils extends org.openspcoop2.generic_project.web.impl.jsf1.utils.U
 
 			if(lb!= null && lb.getIsLoggedIn()){
 				OperatoreModel loggedUtente = lb.getLoggedUtente();
-				return loggedUtente.getEnti(); 
+				List<EnteCreditoreModel> lst = new ArrayList<EnteCreditoreModel>();
+				
+				for (EnteCreditoreModel ente : loggedUtente.getEnti()) {
+					if(ente != null)
+						lst.add(ente);
+				}
+				return lst; 
 			}
 		}
 		return null;
